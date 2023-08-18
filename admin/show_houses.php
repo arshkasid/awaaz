@@ -1,0 +1,9 @@
+<?php
+
+
+show_houses();
+
+
+
+
+?>
