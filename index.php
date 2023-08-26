@@ -45,6 +45,7 @@ global $con;
        $mobile=$_POST['mobile'];
        $reason=$_POST['reason'];
        $prev=$_POST['prev'];
+       $SI_pref=$_POST['SI_pref'];
     //    recieved is current date
 
        $received=date("Y-m-d");
@@ -72,7 +73,7 @@ global $con;
   
 
 
-       $insert_query="insert into `requests` (`adhi_pad`,`adhi_no`,`pno`,`name`,`tainati`,`mobile`,`reason`,`prev`,`pno_added`) values ('$adhi_pad','$adhi_no','$pno','$name','$tainati','$mobile','$reason','$prev','$pno_added')";
+       $insert_query="insert into `requests` (`adhi_pad`,`adhi_no`,`pno`,`name`,`tainati`,`mobile`,`reason`,`prev`,`pno_added`,`SI_pref`) values ('$adhi_pad','$adhi_no','$pno','$name','$tainati','$mobile','$reason','$prev','$pno_added','$SI_pref')";
        $insert_result=mysqli_query($con,$insert_query);
        if($insert_result){
            echo "<script> alert('awaaz added')</script>";
@@ -244,12 +245,49 @@ if(isset($_SESSION['pno'])){
        
 <form action="" method="post">
             <!-- adhi_pad -->
+            
+
+
+
+
             <div class="form-outline mb-4 w-50 m-auto">
-                <label for="adhi_pad" class="form-label">अधि0/कर्म०गण का
+        <label for="adhi_pad" class="form-label">अधि0/कर्म०गण का
 पद</label>
-                <input type="text" name="adhi_pad" id="adhi_pad" class="form-control" placeholder="अधि0/कर्म०गण का
-पद" required="required">
-            </div>
+        <select name="adhi_pad" id="adhi_pad" class="form-select" required="required">
+            <option value="Constable">Constable</option>
+            <option value="Head Constable">Head Constable</option>
+            <option value="Sub Inspector">Sub Inspector</option>
+            <option value="Inspector">Inspector</option>
+            <option value=" Circle Officer"> Circle Officer</option>
+
+            <!-- Add more options based on your columns -->
+        </select>
+    </div>
+
+
+
+    <div class="form-outline mb-4 w-50 m-auto">
+        <label for="SI_pref" class="form-label">यदि सब इंस्पेक्टर है तो कृपया प्राथमिकता तय करें</label>
+        <select name="SI_pref" id="SI_pref" class="form-select" required="required">
+            <option value="B">Type B</option>
+            <option value="C">Type C</option>
+
+            <!-- Add more options based on your columns -->
+        </select>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <!-- adhi_no -->
             <div class="form-outline mb-4 w-50 m-auto">
@@ -300,6 +338,8 @@ if(isset($_SESSION['pno'])){
                 <input type="text" name="prev" id="prev" class="form-control" placeholder="
 निवास का पिछला स्थान">
             </div>
+
+
 
             <!-- Submit -->
             <div class="form-outline mb-4 w-50 m-auto">
