@@ -198,9 +198,8 @@ if(isset($_SESSION['pno'])){
     if($role=='admin'){
         echo "<a href='admin/index.php' class='btn btn-primary'>Admin</a>";
     }
-    if($role=='manage_house
-    '){
-        echo "<a href='manage_house/index.php' class='btn btn-primary'>Manage House</a>";
+    if($role=='manage_house'){
+        echo "<a href='manage/index.php' class='btn btn-primary'>Manage House</a>";
     }
 }
 
