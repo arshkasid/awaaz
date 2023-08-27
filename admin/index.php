@@ -124,6 +124,7 @@ if($admin!=1){
 
 
                     <a style='border-radius:50px' href="index.php?House"  class='btn btn-secondary m-2'>View House status</a>
+                    <a style='border-radius:50px' href="index.php?Accepted_awaaz"  class='btn btn-secondary m-2'>View Acccepted Awaaz</a>
 
                     
                     <!-- <a style='border-radius:50px' href="index.php?Show_requests"  class='btn btn-secondary m-2'>View selectedd requests</a> -->
@@ -201,6 +202,9 @@ if($admin!=1){
             }
             if(isset($_GET['accept'])){
                 include('accept.php');
+            }
+            if(isset($_GET['Accepted_awaaz'])){
+                include('Show_accepted.php');
             }
            
             

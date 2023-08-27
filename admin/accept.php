@@ -110,7 +110,72 @@ echo "<br><br>";
 
 <?php
 
-show_requests();
+global $con;
+$select_query = "SELECT * FROM `requests` WHERE `accepted`=1 ORDER BY `Time` ASC ";
+$result_query = mysqli_query($con, $select_query);
+
+
+
+// Display the dynamic table
+
+echo "<h1 class='text-center p-5'>requests</h1>";
+
+echo "<table border='1'>";
+
+echo "<thead><tr>";
+echo "<th>adhi_pad</th>";
+echo "<th>adhi_no</th>";
+echo "<th>pno</th>";
+echo "<th>name</th>";
+echo "<th>tainati</th>";
+echo "<th>mobile</th>";
+echo "<th>received</th>";
+echo "<th>reason</th>";
+echo "<th>pno_added</th>";
+echo "<th>prev</th>";
+// button to add to cart
+echo "<th>add or remove</th>";
+echo "</tr></thead><tbody>";
+
+while ($row = mysqli_fetch_assoc($result_query)) {
+// Access the column values
+$adhi_pad = $row['adhi_pad'];
+$adhi_no = $row['adhi_no'];
+$pno = $row['pno'];
+$name = $row['name'];
+$tainati = $row['tainati'];
+$mobile = $row['mobile'];
+$received = $row['received'];
+$reason = $row['reason'];
+$pno_added = $row['pno_added'];
+$prev = $row['prev'];
+$accepted= $row['accepted'];
+
+// Display table rows for each item in the armory
+echo "<tr>";
+echo "<td>" . $adhi_pad . "</td>";
+echo "<td>" . $adhi_no . "</td>";
+echo "<td>" . $pno . "</td>";
+echo "<td>" . $name . "</td>";
+echo "<td>" . $tainati . "</td>";
+echo "<td>" . $mobile . "</td>";
+echo "<td>" . $received . "</td>";
+echo "<td>" . $reason . "</td>";
+echo "<td>" . $pno_added . "</td>";
+echo "<td>" . $prev . "</td>";
+if (!$accepted) {
+echo "<td><a href='add.php?pno=$pno' class='btn btn-success m-2' style='border-radius:50px'>Add to selected</a></td>"; 
+}
+else{
+echo "<td><a href='remove.php?pno=$pno' class='btn btn-danger m-2' style='border-radius:50px'>remove from selected</a></td>";
+}
+
+echo "</tr>";
+
+
+}
+echo "</tbody></table>";
+echo "<br><br>";
 
 // add a button to submit the form
 

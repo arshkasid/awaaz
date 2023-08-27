@@ -810,6 +810,99 @@ function search_requests(){
 
 
 
+   // 1	adhi_pad	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 2	adhi_no	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 3	pno	int(11)			No	None			Change Change	Drop Drop	
+                // 4	name	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 5	tainati	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 6	mobile	int(11)			No	None			Change Change	Drop Drop	
+                // 7	received	date			No	None			Change Change	Drop Drop	
+                // 8	reason	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 9	pno_added	int(9)			No	None			Change Change	Drop Drop	
+                // 10	prev	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 11	accepted	int(11)			No	None			Change Change	Drop Drop	
+                // 12	SI_pref	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 13	Time	datetime			No	None			Change Change	Drop Drop	
+                // 14	reason_by_admin	varchar(200)	utf8mb4_general_ci		No	None			Change Change	Drop Drop	
+                // 15	accepted_at	datetime			No	current_timestamp()			Change Change	Drop Drop	
+                // 16	alloted	int(11)			No	None			Change Change	Drop Drop	
+
+
+function show_accepted(){
+    global $con;
+    $select_query = "SELECT * FROM `accepted`";
+$result_query = mysqli_query($con, $select_query);
+
+echo "<h1 class='text-center p-5'>Accepted</h1>";
+
+echo "<table border='1'>";
+echo "<thead><tr>";
+echo "<th>adhi_pad</th>";
+echo "<th>adhi_no</th>";
+echo "<th>pno</th>";
+echo "<th>name</th>";
+echo "<th>tainati</th>";
+echo "<th>mobile</th>";
+echo "<th>received</th>";
+echo "<th>reason</th>";
+echo "<th>pno_added</th>";
+echo "<th>prev</th>";
+echo "<th>accepted</th>";
+echo "<th>SI_pref</th>";
+echo "<th>Time</th>";
+echo "<th>reason_by_admin</th>";
+echo "<th>accepted_at</th>";
+echo "<th>alloted</th>";
+echo "</tr></thead><tbody>";
 
 
 
+while ($row = mysqli_fetch_assoc($result_query)) {
+    // Access the column values
+    $adhi_pad = $row['adhi_pad'];
+    $adhi_no = $row['adhi_no'];
+    $pno = $row['pno'];
+    $name = $row['name'];
+    $tainati = $row['tainati'];
+    $mobile = $row['mobile'];
+    $received = $row['received'];
+    $reason = $row['reason'];
+    $pno_added = $row['pno_added'];
+    $prev = $row['prev'];
+    $accepted= $row['accepted'];
+    $SI_pref= $row['SI_pref'];
+    $Time= $row['Time'];
+    $reason_by_admin= $row['reason_by_admin'];
+    $accepted_at= $row['accepted_at'];
+    $alloted= $row['alloted'];
+
+// Display table rows for each item in the armory
+echo "<tr>";
+echo "<td>" . $adhi_pad . "</td>";
+echo "<td>" . $adhi_no . "</td>";
+echo "<td>" . $pno . "</td>";
+echo "<td>" . $name . "</td>";
+echo "<td>" . $tainati . "</td>";
+echo "<td>" . $mobile . "</td>";
+echo "<td>" . $received . "</td>";
+echo "<td>" . $reason . "</td>";
+echo "<td>" . $pno_added . "</td>";
+echo "<td>" . $prev . "</td>";
+echo "<td>" . $accepted . "</td>";
+echo "<td>" . $SI_pref . "</td>";
+echo "<td>" . $Time . "</td>";
+echo "<td>" . $reason_by_admin . "</td>";
+echo "<td>" . $accepted_at . "</td>";
+echo "<td>" . $alloted . "</td>";   
+echo "</tr>";
+
+}
+echo "</tbody></table>";
+            echo "<br><br>";
+
+
+
+
+
+
+}

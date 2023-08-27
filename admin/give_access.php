@@ -29,10 +29,9 @@
 echo "<table class='table table-striped table-hover table-bordered border-dark'>";
 echo "<thead class='table-dark'>";
 echo "<tr>";
-echo "<th>Employee name</th>";
-echo "<th>Employee number</th>";
-echo "<th>View Access</th>";
-echo "<th>Admin Access</th>";
+echo "<th>name</th>";
+echo "<th>number</th>";
+echo "<th>Role</th>";
 echo "</tr>";
 echo "</thead>";
 
@@ -41,19 +40,11 @@ $result=mysqli_query($con,$select_query);
 while($row_data=mysqli_fetch_assoc($result)){
     $name=$row_data['name'];
     $pno=$row_data['pno'];
+    $role=$row_data['role'];
     echo "<tr>";
     echo "<td>$name</td>";
     echo "<td>$pno</td>";
-    if($row_data['access']==1){
-        echo "<td>Yes</td>";
-    }else{
-        echo "<td>No</td>";
-    }
-    if($row_data['admin']==1){
-        echo "<td>Yes</td>";
-    }else{
-        echo "<td>No</td>";
-    }
+    echo "<td>$role</td>";
 
     echo "</tr>";
 }
@@ -75,15 +66,15 @@ echo "</table>";
             
 
             <div class="form-outline mb-4 w-50 m-auto">
-                <select name="item" id="" class="form-select">
+                <select name="sel_pno" id="" class="form-select">
                     <option value="">pno number</option>
                     <?php
                         $select_row="Select * from `users`";
                         $result_row=mysqli_query($con,$select_row);
                         while($row_data=mysqli_fetch_assoc($result_row)){
-                            $cat_id=$row_data['pno'];
+                            $sel_pno=$row_data['pno'];
                             $name=$row_data['name'];
-                            echo "<option value='$cat_id'>$cat_id &nbsp $name</option>";
+                            echo "<option value='$sel_pno'>$sel_pno &nbsp $name</option>";
                         }
                     ?>
 
@@ -100,11 +91,11 @@ echo "</table>";
 
 
             <div class="form-outline mb-4 w-50 m-auto">
-        <label for="access_p" class="form-label">Update Access permission</label>
-        <select name="access_p" id="access_p" class="form-select" required>
-            <option value="">Update Access permission</option>
-            <option value="0">NO</option>
-            <option value="1">YES</option>
+        <label for="role" class="form-label">Update Role</label>
+        <select name="role" id="role" class="form-select" required>
+            <option value="">Update Role</option>
+            <option value="manage_house">manage_house</option>
+            <option value="req">req</option>
     
 
             <!-- Add more options based on your columns -->
@@ -113,21 +104,9 @@ echo "</table>";
 
 
 
-    <div class="form-outline mb-4 w-50 m-auto">
-        <label for="admin_p" class="form-label">Update Admin permission</label>
-        <select name="admin_p" id="admin_p" class="form-select" required>
-            <option value="">Update Admin permission</option>
-            <option value="0">NO</option>
-            <option value="1">YES</option>
     
-
-            <!-- Add more options based on your columns -->
-        </select>
-    </div>
 
             
-
-
 
 
             <!-- Submit -->
@@ -153,16 +132,19 @@ echo "</table>";
 
 <?php
 if(isset($_POST['insert_data'])){
-$admin_p=$_POST['admin_p'];
-$access_p=$_POST['access_p'];
-$pno=$_POST['item'];
 
-$update_query="UPDATE `users` SET `access` = '$access_p', `admin` = '$admin_p' WHERE `users`.`pno` = '$pno'";
+$role=$_POST['role'];
+$sel_pno=$_POST['sel_pno'];
+
+
+
+if($sel_pno!=$_SESSION['pno']){
+$update_query="UPDATE `users` SET `role` = '$role' WHERE `users`.`pno` = '$sel_pno'";
 
 $result=mysqli_query($con,$update_query);
 
 if($result){
-    echo "<script>alert('Successfully updated data into the Armoury.')</script>";
+    echo "<script>alert('Successfully updated data')</script>";
 
 
 
@@ -173,22 +155,11 @@ if($result){
 
 // change changes table data
 
-$who_changed=$_SESSION['pno'];
-$changed_pno=$_POST['item'];
-$new_access=$_POST['access_p'];
-$new_admin=$_POST['admin_p'];
-$date=date("Y-m-d");
-
-$insert_query="INSERT INTO `changeofaccess` (`who_changed`, `changed_pno`, `new_access`, `new_admin` ,`date`) VALUES ('$who_changed', '$changed_pno', '$new_access', '$new_admin', '$date')";
-$result_query = mysqli_query($con, $insert_query);
-
-
-
-
-
 }else{
     echo "<script>alert('Error: Failed to insert data. Please try again.')</script>";
 }
+}
 
 }
+
 ?>

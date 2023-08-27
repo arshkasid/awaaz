@@ -198,8 +198,9 @@ if(isset($_SESSION['pno'])){
     if($role=='admin'){
         echo "<a href='admin/index.php' class='btn btn-primary'>Admin</a>";
     }
-    if($role=='manage'){
-        echo "<a href='admin/index.php' class='btn btn-primary'>Admin</a>";
+    if($role=='manage_house
+    '){
+        echo "<a href='manage_house/index.php' class='btn btn-primary'>Manage House</a>";
     }
 }
 
@@ -258,7 +259,7 @@ if(isset($_SESSION['pno'])){
             <option value="Head Constable">Head Constable</option>
             <option value="Sub Inspector">Sub Inspector</option>
             <option value="Inspector">Inspector</option>
-            <option value=" Circle Officer"> Circle Officer</option>
+            <option value="Circle Officer">Circle Officer</option>
 
             <!-- Add more options based on your columns -->
         </select>
